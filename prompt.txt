@@ -1,0 +1,67 @@
+création LP *ProdCom – Marketing Médical*
+*ProdCom* agence spécialisée en marketing médical. L’objectif est de présenter nos offres, nos tarifs, notre équipe et nos références de manière claire et persuasive.
+
+*Palette de couleurs :*
+
+Utiliser les couleurs du logo fourni (bleu médical #0077b6 et gris foncé #545454 ).
+Fond blanc pour un aspect médical et épuré.
+Accent de couleur bleu pour les boutons, titres et éléments interactifs.
+
+Menu simple à droite : Accueil | Packs | Équipe | Références | Contact.
+Bouton CTA bien visible : *"Demandez un audit gratuit"* - *decouvrir les packs*
+
+ *Section Hero*
+
+Grande image ou visuel représentant le marketing médical (peut inclure des médecins souriants; photos fournis).
+  Titre :*"Boostez la visibilité de votre cabinet médical"*
+  Sous-titre : *"Des stratégies digitales sur mesure pour les professionnels de santé"*
+* Bouton principal : *"Je demande mon audit gratuit"*
+
+* decouvrir notre travail
+*: dans cette section je veux mettre un slider pour les videos
+
+
+
+ *Nos Packs & Tarifs*
+
+Mentionnee avant les packs :*"Tarifs à partir de 4700 DHs"*.
+*Présentation claire de **2 cartes d’offres** :
+
+*Pack Gold – 1 mois – 6700 DHs*
+
+-8 Réels
+-10 Publications professionnelles
+-10 Stories
+-Gestion réseaux sociaux -gestion ads
+
+*Pack Platinium – 3 mois – 24 900 DHs*
+
+-18 Réels
+-18 Publications professionnelles
+-18 Stories
+-gestion réseaux sociaux -gestion ads
+-Couverture média
+-Collaboration avec acteurs ou influenceurs (selon préférences)
+
+
+si possible que les pack se présente sous forme de tableau comparatif plus un petit tag "le plus populaire" sur le pack Platinium 
+
+
+
+
+
+ *Section Contact / Formulaire*
+
+Nom - Prenom - telephone - email - specialite - pack (gold ou platinum)
+Bouton : *"Envoyer ma demande"*
+Lien vers WhatsApp pour contact rapide.
+
+
+ *Footer*
+
+Nos Coordonnées 📞 0522 63 79 58 | 0706 55 36 42 | 0711 77 40 87
+📧 prod.agency.contact@gmail.com
+🌐 prodcom.agency
+📸 Instagram : @prodcom_maroc
+Liens vers réseaux sociaux ( Instagram ).
+Mentions légales et politique de confidentialité.
