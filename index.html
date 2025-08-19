@@ -119,69 +119,20 @@
     <section id="decouvrir" class="discover-section">
         <div class="container">
             <h2 class="section-title">Découvrir notre travail</h2>
-            <div class="video-slider">
-                <div class="slider-container">
-                    <div class="slider-track">
-                        <div class="slide">
-                            <video controls class="video-slide">
-                                <source src="videos/v.mp4" type="video/mp4">
-                                Votre navigateur ne supporte pas la lecture de vidéos.
-                            </video>
-                        </div>
-                        <div class="slide">
-                            <video controls class="video-slide">
-                                <source src="videos/v1.mp4" type="video/mp4">
-                                Votre navigateur ne supporte pas la lecture de vidéos.
-                            </video>
-                        </div>
-                        <div class="slide">
-                            <video controls class="video-slide">
-                                <source src="videos/v2.mp4" type="video/mp4">
-                                Votre navigateur ne supporte pas la lecture de vidéos.
-                            </video>
-                        </div>
-                        <div class="slide">
-                            <video controls class="video-slide">
-                                <source src="videos/v3.mp4" type="video/mp4">
-                                Votre navigateur ne supporte pas la lecture de vidéos.
-                            </video>
-                        </div>
-                        <div class="slide">
-                            <video controls class="video-slide">
-                                <source src="videos/v4.mp4" type="video/mp4">
-                                Votre navigateur ne supporte pas la lecture de vidéos.
-                            </video>
-                        </div>
-                        <div class="slide">
-                            <video controls class="video-slide">
-                                <source src="videos/v5.mp4" type="video/mp4">
-                                Votre navigateur ne supporte pas la lecture de vidéos.
-                            </video>
-                        </div>
-                        <div class="slide">
-                            <video controls class="video-slide">
-                                <source src="videos/v6.mp4" type="video/mp4">
-                                Votre navigateur ne supporte pas la lecture de vidéos.
-                            </video>
-                        </div>
-                    </div>
+            <div class="simple-video-slider">
+                <div class="video-container">
+                    <video controls class="main-video">
+                        <source src="videos/v.mp4" type="video/mp4">
+                        Votre navigateur ne supporte pas la lecture de vidéos.
+                    </video>
                 </div>
-                <div class="slider-controls">
-                    <button class="slider-btn prev-btn" onclick="prevSlide()">
+                <div class="video-navigation">
+                    <button class="nav-btn prev-btn" onclick="previousVideo()">
                         <i class="fas fa-chevron-left"></i>
                     </button>
-                    <button class="slider-btn next-btn" onclick="nextSlide()">
+                    <button class="nav-btn next-btn" onclick="nextVideo()">
                         <i class="fas fa-chevron-right"></i>
                     </button>
-                </div>
-                <div class="slider-dots">
-                    <span class="dot active" onclick="goToSlide(0)"></span>
-                    <span class="dot" onclick="goToSlide(1)"></span>
-                    <span class="dot" onclick="goToSlide(2)"></span>
-                    <span class="dot" onclick="goToSlide(3)"></span>
-                    <span class="dot" onclick="goToSlide(4)"></span>
-                    <span class="dot" onclick="goToSlide(5)"></span>
-                    <span class="dot" onclick="goToSlide(6)"></span>
                 </div>
             </div>
         </div>
@@ -475,70 +426,7 @@
             });
         });
 
-        // Variables globales pour le slider
-        let currentSlide = 0;
-        const totalSlides = 7;
-        const slideTrack = document.querySelector('.slider-track');
-        const dots = document.querySelectorAll('.dot');
 
-        // Fonction pour aller à la slide suivante
-        function nextSlide() {
-            currentSlide = (currentSlide + 1) % totalSlides;
-            updateSlider();
-        }
-
-        // Fonction pour aller à la slide précédente
-        function prevSlide() {
-            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
-            updateSlider();
-        }
-
-        // Fonction pour aller à une slide spécifique
-        function goToSlide(slideIndex) {
-            currentSlide = slideIndex;
-            updateSlider();
-        }
-
-        // Fonction pour mettre à jour l'affichage du slider
-        function updateSlider() {
-            const translateX = -currentSlide * (100 / totalSlides);
-            slideTrack.style.transform = `translateX(${translateX}%)`;
-            
-            // Mise à jour des points de navigation
-            dots.forEach((dot, index) => {
-                dot.classList.toggle('active', index === currentSlide);
-            });
-        }
-
-        // Auto-play du slider (optionnel)
-        let autoPlayInterval;
-        
-        function startAutoPlay() {
-            autoPlayInterval = setInterval(nextSlide, 5000); // Change de slide toutes les 5 secondes
-        }
-        
-        function stopAutoPlay() {
-            clearInterval(autoPlayInterval);
-        }
-
-        // Démarrer l'auto-play au chargement de la page
-        document.addEventListener('DOMContentLoaded', function() {
-            startAutoPlay();
-            
-            // Arrêter l'auto-play quand l'utilisateur interagit avec le slider
-            const sliderContainer = document.querySelector('.slider-container');
-            sliderContainer.addEventListener('mouseenter', stopAutoPlay);
-            sliderContainer.addEventListener('mouseleave', startAutoPlay);
-        });
-
-        // Navigation au clavier
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'ArrowLeft') {
-                prevSlide();
-            } else if (e.key === 'ArrowRight') {
-                nextSlide();
-            }
-        });
 
         // Gestion du formulaire de contact vers Google Sheets
         document.getElementById('contactForm').addEventListener('submit', function(e) {
