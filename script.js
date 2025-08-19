@@ -39,12 +39,28 @@ let autoPlayInterval = null;
 
 // Initialisation au chargement de la page
 document.addEventListener('DOMContentLoaded', function() {
+	console.log('DOM loaded, initializing...');
 	initializeSlider();
 	initializeMobileNav();
 	initializeSmoothScrolling();
 	// initializeScrollAnimations(); // DÉSACTIVÉ - cause le problème de disparition
 	initializeFormHandling();
 	initializePackSelection();
+	
+	// Fallback: direct event listener on hamburger
+	setTimeout(() => {
+		const hamburger = document.querySelector('.hamburger');
+		const navMenu = document.querySelector('.nav-menu');
+		
+		if (hamburger && navMenu) {
+			console.log('Adding fallback hamburger listener...');
+			hamburger.onclick = function() {
+				console.log('Fallback hamburger clicked!');
+				this.classList.toggle('active');
+				navMenu.classList.toggle('active');
+			};
+		}
+	}, 1000);
 });
 
 // Initialisation du slider vidéo
@@ -147,13 +163,19 @@ function addSliderInteractionEvents() {
 
 // Mobile Navigation
 function initializeMobileNav() {
+	console.log('Initializing mobile navigation...');
 	const hamburger = document.querySelector('.hamburger');
 	const navMenu = document.querySelector('.nav-menu');
 	
+	console.log('Hamburger found:', hamburger);
+	console.log('Nav menu found:', navMenu);
+	
 	if (hamburger && navMenu) {
 		hamburger.addEventListener('click', function() {
+			console.log('Hamburger clicked!');
 			hamburger.classList.toggle('active');
 			navMenu.classList.toggle('active');
+			console.log('Menu active:', navMenu.classList.contains('active'));
 		});
 		
 		// Close menu when clicking on a link
@@ -172,6 +194,8 @@ function initializeMobileNav() {
 				navMenu.classList.remove('active');
 			}
 		});
+	} else {
+		console.error('Hamburger or nav menu not found!');
 	}
 }
 
@@ -230,31 +254,8 @@ function initializeScrollAnimations() {
 
 // Gestion du formulaire
 function initializeFormHandling() {
-	const contactForm = document.getElementById('contactForm');
-	
-	if (!contactForm) return;
-	
-	contactForm.addEventListener('submit', function(e) {
-		e.preventDefault();
-		
-		// Récupérer les données du formulaire
-		const formData = new FormData(this);
-		const data = Object.fromEntries(formData);
-		
-		// Validation basique
-		if (validateForm(data)) {
-			// Simuler l'envoi du formulaire
-			showFormSuccess();
-			
-			// Réinitialiser le formulaire
-			this.reset();
-			
-			// Rediriger vers WhatsApp avec les informations
-			const whatsappMessage = formatWhatsAppMessage(data);
-			const whatsappUrl = `https://wa.me/212706553642?text=${encodeURIComponent(whatsappMessage)}`;
-			window.open(whatsappUrl, '_blank');
-		}
-	});
+	// Form handling is now done in HTML file
+	console.log('Form handling initialized in HTML');
 }
 
 // Validation du formulaire
@@ -278,36 +279,7 @@ function validateForm(data) {
 	return true;
 }
 
-// Formatage du message WhatsApp
-function formatWhatsAppMessage(data) {
-	return `Bonjour ! Je suis intéressé(e) par vos services de marketing médical.
-
-*Informations personnelles :*
-- Nom : ${data.nom}
-- Prénom : ${data.prenom}
-- Téléphone : ${data.telephone}
-- Email : ${data.email}
-- Spécialité : ${data.specialite}
-
-*Pack souhaité :* ${data.pack}
-
-Je souhaite recevoir plus d'informations et un audit gratuit.`;
-}
-
 // Affichage des messages de succès/erreur
-function showFormSuccess() {
-	const submitBtn = document.querySelector('.submit-btn');
-	const originalText = submitBtn.innerHTML;
-	
-	submitBtn.innerHTML = '<i class="fas fa-check"></i> Message envoyé !';
-	submitBtn.style.background = '#28a745';
-	
-	setTimeout(() => {
-		submitBtn.innerHTML = originalText;
-		submitBtn.style.background = '';
-	}, 3000);
-}
-
 function showFormError(message) {
 	// Créer une notification d'erreur
 	const errorDiv = document.createElement('div');
