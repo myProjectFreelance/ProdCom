@@ -607,7 +607,7 @@ body::before {
     transform: scale(1.1);
 }
 
-/* Amélioration du slider pour 7 vidéos */
+/* Slider simplifié: chaque slide prend 100% de la largeur */
 .slider-track {
     display: flex;
     transition: transform 0.5s ease;
@@ -615,14 +615,69 @@ body::before {
 }
 
 .slide {
-    min-width: 14.285%; /* 100% ÷ 7 vidéos */
-    position: relative;
+    min-width: 100%;
+    flex-shrink: 0;
 }
 
+/* Ajustement des vidéos: taille naturelle et responsive */
 .video-slide {
     width: 100%;
-    height: 450px;
-    object-fit: cover;
+    height: auto;
+    max-height: 80vh;
+    object-fit: contain;
+    background: #000;
+    display: block;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Fallback pour les vidéos qui ne se chargent pas */
+.video-slide:not([src]) {
+    background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 300px;
+    color: #6c757d;
+    font-weight: 500;
+    font-size: 1.1rem;
+}
+
+/* Amélioration de l'affichage des vidéos */
+.video-slide::-webkit-media-controls {
+    background: rgba(0, 0, 0, 0.7);
+    border-radius: 10px;
+}
+
+.video-slide::-webkit-media-controls-panel {
+    background: rgba(0, 0, 0, 0.8);
+}
+
+@media (max-width: 768px) {
+    .video-slide {
+        max-height: 60vh;
+    }
+}
+
+@media (max-width: 480px) {
+    .video-slide {
+        max-height: 50vh;
+    }
+}
+
+.video-slide[data-status="error"]::after {
+    content: '⚠️ Vidéo non disponible';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #6c757d;
+    font-weight: 500;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 1rem 2rem;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 .slide-caption {
@@ -2645,3 +2700,146 @@ body::before {
         padding: 0 1rem;
     }
 }
+
+/* Slider vidéo simple */
+.simple-video-slider {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem 0;
+}
+
+.video-container {
+    margin-bottom: 2rem;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.main-video {
+    width: 100%;
+    height: auto;
+    max-height: 70vh;
+    display: block;
+    background: #000;
+}
+
+.video-navigation {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.nav-btn {
+    padding: 1.2rem;
+    background: linear-gradient(135deg, var(--primary-blue), var(--accent-blue));
+    color: white;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 1.1rem;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 8px 25px rgba(0, 119, 182, 0.3);
+    position: relative;
+    overflow: hidden;
+    width: 60px;
+    height: 60px;
+}
+
+.nav-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.6s;
+}
+
+.nav-btn:hover::before {
+    left: 100%;
+}
+
+.nav-btn:hover {
+    background: linear-gradient(135deg, var(--accent-blue), var(--primary-blue));
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 15px 35px rgba(0, 119, 182, 0.4);
+}
+
+.nav-btn:active {
+    transform: translateY(-1px) scale(1.02);
+    transition: all 0.1s;
+}
+
+.nav-btn i {
+    font-size: 1.3rem;
+    transition: transform 0.3s ease;
+}
+
+.prev-btn:hover i {
+    transform: translateX(-3px);
+}
+
+.next-btn:hover i {
+    transform: translateX(3px);
+}
+
+/* Animation d'entrée pour les boutons */
+.nav-btn {
+    animation: buttonFloat 2s ease-in-out infinite;
+}
+
+@keyframes buttonFloat {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-2px);
+    }
+}
+
+.nav-btn:hover {
+    animation: none;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .video-navigation {
+        gap: 1rem;
+    }
+    
+    .nav-btn {
+        width: 55px;
+        height: 55px;
+        padding: 1rem;
+    }
+    
+    .nav-btn i {
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .video-navigation {
+        flex-direction: row;
+        align-items: center;
+        gap: 1rem;
+    }
+    
+    .nav-btn {
+        width: 50px;
+        height: 50px;
+        padding: 0.8rem;
+    }
+    
+    .nav-btn i {
+        font-size: 1.1rem;
+    }
+}
+
+
