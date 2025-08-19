@@ -24,7 +24,7 @@
                     <a href="#decouvrir" class="nav-link" lang="fr">Découvrir</a>
                 </li>
                 <li class="nav-item">
-                    <a href="#packs" class="nav-link" lang="fr">Packs</a>
+                    <a href="#packs" class="nav-link" lang="fr" onclick="scrollToPacks()">Packs</a>
                 </li>
                 <li class="nav-item">
                     <a href="#contact" class="nav-link nav-contact" lang="fr">Contact</a>
@@ -208,8 +208,9 @@
         <div class="container">
             <h2 class="section-title">Contactez-nous</h2>
             <div class="contact-content">
-                <form class="contact-form" id="contactForm" action="https://script.google.com/macros/s/AKfycbzU-TAQ-FUDVJP5_ofipdl8_iRKQ1f_zTSt5DmmqmWHXnnWlnVHsrp36dv-dhMUstGsKw/exec" method="POST">
+                <form class="contact-form" id="contactForm" action="https://script.google.com/macros/s/AKfycbz_31kQ2JtAIQxUF7_x5Xm45QMdrs8nVWSgm4K50lGJcR9NiTxdHKu_VSDVhW80AllH/exec" method="POST">
                     <h3 style="margin-bottom: 2rem; color: var(--primary-blue); text-align: center;">Formulaire de contact</h3>
+                    
                     <div class="form-row">
                         <div class="form-group">
                             <label for="nom">Nom *</label>
@@ -220,6 +221,7 @@
                             <input type="text" id="prenom" name="prenom" required>
                         </div>
                     </div>
+                    
                     <div class="form-row">
                         <div class="form-group">
                             <label for="telephone">Téléphone *</label>
@@ -230,6 +232,7 @@
                             <input type="email" id="email" name="email" required>
                         </div>
                     </div>
+                    
                     <div class="form-row">
                         <div class="form-group">
                             <label for="specialite">Spécialité *</label>
@@ -244,6 +247,7 @@
                             </select>
                         </div>
                     </div>
+                    
                     <button type="submit" class="submit-btn">
                         <i class="fas fa-paper-plane"></i>
                         Envoyer ma demande
@@ -284,7 +288,7 @@
                             </a>
                         </div>
                     </div>
-                    <a href="https://wa.me/212706553642" class="whatsapp-btn" target="_blank">
+                    <a href="https://wa.me/212711774087" class="whatsapp-btn" target="_blank">
                         <i class="fab fa-whatsapp"></i>
                         Contactez-nous sur WhatsApp
                     </a>
@@ -428,59 +432,65 @@
 
 
 
-        // Gestion du formulaire de contact vers Google Sheets
-        document.getElementById('contactForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const formData = new FormData(this);
-            const submitBtn = this.querySelector('.submit-btn');
-            const originalText = submitBtn.innerHTML;
-            
-            // Désactiver le bouton et afficher "Envoi en cours..."
-            submitBtn.disabled = true;
-            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Envoi en cours...';
-            
-            // Envoyer les données vers Google Sheets
-            fetch(this.action, {
-                method: 'POST',
-                body: formData,
-                mode: 'no-cors'
-            })
-            .then(() => {
-                // Succès
-                submitBtn.innerHTML = '<i class="fas fa-check"></i> Envoyé avec succès !';
-                submitBtn.style.background = 'linear-gradient(135deg, #28a745, #20c997)';
+        // Gestion du formulaire de contact
+        const contactForm = document.getElementById('contactForm');
+        console.log('Contact form found:', contactForm);
+        
+        if (contactForm) {
+            contactForm.addEventListener('submit', function(e) {
+                console.log('Form submit event triggered');
                 
-                // Réinitialiser le formulaire
-                this.reset();
+                const submitBtn = this.querySelector('.submit-btn');
+                const originalText = submitBtn.innerHTML;
                 
-                // Afficher un message de succès
-                showNotification('Votre demande a été envoyée avec succès !', 'success');
+                // Désactiver le bouton et afficher "Envoi en cours..."
+                submitBtn.disabled = true;
+                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Envoi en cours...';
                 
-                // Remettre le bouton à l'état initial après 3 secondes
+                // Log form data
+                const formData = new FormData(this);
+                console.log('Form data:', Object.fromEntries(formData));
+                console.log('Form action:', this.action);
+                
+                // Créer un iframe caché pour soumettre le formulaire sans redirection
+                const iframe = document.createElement('iframe');
+                iframe.name = 'hidden-iframe';
+                iframe.style.display = 'none';
+                document.body.appendChild(iframe);
+                
+                // Rediriger le formulaire vers l'iframe
+                this.target = 'hidden-iframe';
+                
+                console.log('Form target set to iframe, submitting...');
+                
+                // Attendre un peu pour que l'envoi se fasse, puis afficher le succès
                 setTimeout(() => {
-                    submitBtn.disabled = false;
-                    submitBtn.innerHTML = originalText;
-                    submitBtn.style.background = 'linear-gradient(135deg, var(--primary-blue), var(--accent-blue))';
-                }, 3000);
-            })
-            .catch((error) => {
-                // Erreur
-                console.error('Erreur:', error);
-                submitBtn.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Erreur d\'envoi';
-                submitBtn.style.background = 'linear-gradient(135deg, #dc3545, #c82333)';
-                
-                // Afficher un message d'erreur
-                showNotification('Erreur lors de l\'envoi. Veuillez réessayer.', 'error');
-                
-                // Remettre le bouton à l'état initial après 3 secondes
-                setTimeout(() => {
-                    submitBtn.disabled = false;
-                    submitBtn.innerHTML = originalText;
-                    submitBtn.style.background = 'linear-gradient(135deg, var(--primary-blue), var(--accent-blue))';
-                }, 3000);
+                    console.log('Form submission timeout completed');
+                    
+                    // Succès
+                    submitBtn.innerHTML = '<i class="fas fa-check"></i> Envoyé avec succès !';
+                    submitBtn.style.background = 'linear-gradient(135deg, #28a745, #20c997)';
+                    
+                    // Réinitialiser le formulaire
+                    this.reset();
+                    
+                    // Afficher un message de succès
+                    showNotification('Votre demande a été envoyée avec succès !', 'success');
+                    
+                    // Remettre le bouton à l'état initial après 3 secondes
+                    setTimeout(() => {
+                        submitBtn.disabled = false;
+                        submitBtn.innerHTML = originalText;
+                        submitBtn.style.background = 'linear-gradient(135deg, var(--primary-blue), var(--accent-blue))';
+                    }, 3000);
+                    
+                    // Nettoyer l'iframe
+                    document.body.removeChild(iframe);
+                }, 2000);
             });
-        });
+        } else {
+            console.error('Contact form not found!');
+        }
 
         // Fonction pour afficher les notifications
         function showNotification(message, type) {
