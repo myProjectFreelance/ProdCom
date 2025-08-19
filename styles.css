@@ -98,12 +98,13 @@ body::before {
     list-style: none;
     margin: 0;
     padding: 0;
-    gap: 2rem;
+    gap: 2.5rem;
     align-items: center;
 }
 
 .nav-item {
     list-style: none;
+    position: relative;
 }
 
 .nav-link {
@@ -116,6 +117,8 @@ body::before {
     letter-spacing: 0.1em;
     transition: all 0.3s ease;
     position: relative;
+    padding: 0.5rem 0;
+    display: block;
 }
 
 /* Fallback pour les caractères accentués */
@@ -1399,6 +1402,60 @@ body::before {
     color: var(--dark-gray) !important;
 }
 
+/* Styles responsifs pour les numéros de téléphone */
+@media (max-width: 768px) {
+    .phone-numbers {
+        flex-direction: column !important;
+        gap: 0.5rem !important;
+        align-items: flex-start !important;
+    }
+    
+    .phone-numbers p {
+        font-size: 1rem !important;
+        padding: 0.5rem 0 !important;
+        border-bottom: 1px solid rgba(0, 123, 255, 0.1) !important;
+        width: 100% !important;
+        text-align: left !important;
+    }
+    
+    .phone-numbers p:last-child {
+        border-bottom: none !important;
+    }
+    
+    .contact-item {
+        padding: 1.5rem !important;
+        margin-bottom: 1.5rem !important;
+    }
+    
+    .contact-item i {
+        font-size: 1.8rem !important;
+        margin-right: 1.2rem !important;
+        width: 35px !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .phone-numbers {
+        gap: 0.3rem !important;
+    }
+    
+    .phone-numbers p {
+        font-size: 0.95rem !important;
+        padding: 0.4rem 0 !important;
+    }
+    
+    .contact-item {
+        padding: 1.2rem !important;
+        margin-bottom: 1.2rem !important;
+    }
+    
+    .contact-item i {
+        font-size: 1.6rem !important;
+        margin-right: 1rem !important;
+        width: 30px !important;
+    }
+}
+
 /* Bouton WhatsApp amélioré */
 .whatsapp-btn {
     display: flex;
@@ -1546,19 +1603,11 @@ body::before {
     }
 
     .hamburger {
-        display: flex;
+        display: flex !important;
     }
-
-    .hamburger.active .bar:nth-child(2) {
-        opacity: 0;
-    }
-
-    .hamburger.active .bar:nth-child(1) {
-        transform: translateY(8px) rotate(45deg);
-    }
-
-    .hamburger.active .bar:nth-child(3) {
-        transform: translateY(-8px) rotate(-45deg);
+    
+    .nav-container {
+        justify-content: space-between;
     }
 
     .hero-container {
@@ -1581,9 +1630,6 @@ body::before {
 
     .hero-buttons {
         justify-content: center;
-    }
-
-    .hero-buttons {
         align-items: center;
     }
 
@@ -1620,143 +1666,8 @@ body::before {
 
     .mobile-hero {
         display: block;
-    }
-
-    /* Amélioration des informations de contact sur mobile */
-    .contact-item {
-        padding: 1.5rem;
-        margin-bottom: 1.5rem;
-        border-radius: 15px;
-        background: var(--white);
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-    }
-
-    .contact-item i {
-        font-size: 1.8rem;
-        margin-right: 1.2rem;
-        width: 35px;
-        color: var(--primary-blue);
-    }
-
-    /* Numéros de téléphone sur mobile */
-    .phone-numbers {
-        display: flex !important;
-        flex-direction: column !important;
-        gap: 0.8rem !important;
-        align-items: flex-start !important;
-        width: 100% !important;
-    }
-
-    .phone-numbers p {
-        font-size: 1rem !important;
-        font-weight: 500 !important;
-        color: var(--dark-gray) !important;
-        padding: 0.5rem 0 !important;
-        margin: 0 !important;
-        border-bottom: 1px solid rgba(0, 123, 255, 0.1) !important;
-        width: 100% !important;
-        text-align: left !important;
-    }
-
-    .phone-numbers p:last-child {
-        border-bottom: none !important;
-    }
-
-    /* Email sur mobile */
-    .contact-item .contact-link {
-        font-size: 1rem;
-        font-weight: 500;
-        color: var(--primary-blue);
-        text-decoration: none;
-        padding: 0.5rem 0;
-        display: block;
-        width: 100%;
-        word-break: break-word;
-        line-height: 1.4;
-    }
-
-    .contact-item .contact-link:hover {
-        color: var(--accent-blue);
-        text-decoration: underline;
-    }
-
-    /* Titre de la section contact sur mobile */
-    .contact-info h3 {
-        font-size: 1.5rem;
-        margin-bottom: 2.5rem;
+        margin: 0 auto;
         text-align: center;
-        color: var(--primary-blue);
-    }
-
-    /* Liens de contact sur mobile */
-    .contact-item div {
-        flex: 1;
-        min-width: 0;
-    }
-
-    /* Bouton WhatsApp sur mobile */
-    .whatsapp-btn {
-        padding: 1.5rem 2rem;
-        font-size: 1.2rem;
-        margin-top: 2.5rem;
-        border-radius: 20px;
-    }
-
-    /* Ajustements spécifiques pour l'image mobile */
-    .hero-image-container {
-        margin: 0;
-        text-align: center;
-    }
-
-    .mobile-hero {
-        width: 100%;
-        max-width: 450px;
-        height: auto;
-        margin: 0;
-        object-fit: contain;
-    }
-
-    /* Ajustements des cartes de packs sur mobile */
-    .pack-card {
-        padding: 1.5rem;
-        margin-bottom: 1.5rem;
-        text-align: center;
-    }
-
-    .pack-header {
-        text-align: center;
-        margin-bottom: 1.5rem;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        width: 100%;
-    }
-
-    .pack-header h3 {
-        font-size: 1.5rem;
-        margin-bottom: 0.75rem;
-        text-align: center;
-        width: 100%;
-    }
-
-    .pack-price {
-        text-align: center;
-        margin-bottom: 1rem;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        width: 100%;
-    }
-
-    .pack-features {
-        margin: 0 0 1.5rem 0;
-    }
-
-    .pack-features li {
-        padding: 0.4rem 0;
-        font-size: 0.9rem;
     }
 }
 
@@ -1794,6 +1705,8 @@ body::before {
     .mobile-hero {
         max-width: 400px;
         width: 95%;
+        margin: 0 auto;
+        text-align: center;
     }
 
     /* Ajustements des cartes de packs sur très petit écran */
@@ -2036,13 +1949,16 @@ body::before {
 .nav-contact {
     background: linear-gradient(135deg, var(--primary-blue), var(--accent-blue));
     color: var(--white) !important;
-    padding: 0.8rem 1.5rem !important;
-    border-radius: 25px;
+    padding: 0.5rem 1rem !important;
+    border-radius: 20px;
     border: 2px solid transparent;
     transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
     box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
+    margin-left: 0.5rem;
+    white-space: nowrap;
+    z-index: 10;
 }
 
 .nav-contact::before {
@@ -2839,6 +2755,62 @@ body::before {
     
     .nav-btn i {
         font-size: 1.1rem;
+    }
+}
+
+/* Responsive navbar */
+@media (max-width: 1024px) {
+    .nav-menu {
+        gap: 2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .nav-menu {
+        gap: 1.5rem;
+    }
+    
+    .nav-link {
+        font-size: 1rem;
+    }
+    
+    .nav-contact {
+        padding: 0.4rem 0.8rem !important;
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .nav-menu {
+        gap: 1rem;
+    }
+    
+    .nav-link {
+        font-size: 0.9rem;
+    }
+    
+    .nav-contact {
+        padding: 0.3rem 0.6rem !important;
+        font-size: 0.8rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .nav-menu {
+        top: 70px;
+        padding: 1.5rem 0;
+    }
+    
+    .hamburger {
+        display: flex !important;
+    }
+    
+    .hero-title {
+        font-size: 2rem;
+    }
+    
+    .hero-subtitle {
+        font-size: 0.75rem;
     }
 }
 
